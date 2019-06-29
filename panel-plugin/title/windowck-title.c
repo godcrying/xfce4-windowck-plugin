@@ -338,8 +338,10 @@ gboolean on_title_pressed(GtkWidget *title, GdkEventButton *event, WindowckPlugi
             // gdk_device_get_position(mouse, NULL, &x, &y);
 
             // TODO: Provide a second argument to gdk_device_get_state
+            // 给gdk_device_get_state加了个参数，使鼠标可以定位在标题栏合适的位置
+	    GdkWindow *title_window = gtk_widget_get_window(title);
             gdouble xy[2];
-            gdk_device_get_state(mouse, NULL, xy, NULL);
+            gdk_device_get_state(mouse, title_window, xy, NULL);
 
             xev.xclient.data.l[0] = xy[0];
             xev.xclient.data.l[1] = xy[1];
